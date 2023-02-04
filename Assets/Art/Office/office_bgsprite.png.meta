@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5454aa8e838a70c488028fc2b07ddccb
+guid: 61f6e4ec3cc4595428321419a1e06e94
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,13 +105,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: office_table_0
+      name: office_bgsprite_0
       rect:
         serializedVersion: 2
-        x: 1061
-        y: 946
-        width: 549
-        height: 303
+        x: 136
+        y: 1273
+        width: 276
+        height: 505
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,20 +119,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2137937e0eb88ef4e9d1a43bbe49d614
-      internalID: -1591782265
+      spriteID: 36bb5667670dc9a4aa3a2c40f7db78a1
+      internalID: 888370388
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: office_table_1
+      name: office_bgsprite_1
       rect:
         serializedVersion: 2
-        x: 16
-        y: 93
-        width: 129
-        height: 767
+        x: 507
+        y: 1279
+        width: 244
+        height: 365
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,20 +140,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6f4f4771f4aaf5a4eb876abc172defb5
-      internalID: -940166250
+      spriteID: b73d8c0761513e34591003f10a5a9ea9
+      internalID: -140434400
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: office_table_2
+      name: office_bgsprite_2
       rect:
         serializedVersion: 2
-        x: 162
-        y: 93
-        width: 129
-        height: 767
+        x: 818
+        y: 1279
+        width: 1088
+        height: 576
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,20 +161,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 20f39b8655813274483f6d9394ed6218
-      internalID: 1904676754
+      spriteID: 37fcefb19c499d24fab7882864c5973a
+      internalID: 294410067
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: office_table_3
+      name: office_bgsprite_3
       rect:
         serializedVersion: 2
-        x: 307
-        y: 101
-        width: 1564
-        height: 822
+        x: 2033
+        y: 1386
+        width: 334
+        height: 416
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,8 +182,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6ca601f613429d8469d18e4f2c49f3f9
-      internalID: -2078067549
+      spriteID: ab36ec31eeb771743933fe05c39e3f19
+      internalID: 1165882319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: office_bgsprite_4
+      rect:
+        serializedVersion: 2
+        x: 2415
+        y: 1386
+        width: 333
+        height: 416
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57aca13cdb777e045a0ec5cf52a636c2
+      internalID: 146818048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: office_bgsprite_5
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 82
+        width: 685
+        height: 1102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bc2923f9271486499a76c9d93ebbea5
+      internalID: 437828280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: office_bgsprite_6
+      rect:
+        serializedVersion: 2
+        x: 839
+        y: 941
+        width: 1356
+        height: 165
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b05d1d8931529fe459f2e309c6f563b2
+      internalID: -196081591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: office_bgsprite_7
+      rect:
+        serializedVersion: 2
+        x: 999
+        y: 57
+        width: 2426
+        height: 845
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4a2bf3a551f95d42a26875106257a2c
+      internalID: -1842658367
       vertices: []
       indices: 
       edges: []
@@ -199,10 +283,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      office_table_0: -1591782265
-      office_table_1: -940166250
-      office_table_3: -2078067549
-      office_table_2: 1904676754
+      office_bgsprite_1: -140434400
+      office_bgsprite_3: 1165882319
+      office_bgsprite_5: 437828280
+      office_bgsprite_4: 146818048
+      office_bgsprite_6: -196081591
+      office_bgsprite_0: 888370388
+      office_bgsprite_2: 294410067
+      office_bgsprite_7: -1842658367
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

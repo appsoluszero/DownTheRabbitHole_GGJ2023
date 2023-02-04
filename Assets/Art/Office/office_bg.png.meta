@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5454aa8e838a70c488028fc2b07ddccb
+guid: 07bd296f25eb73c42af22ac7b60951d7
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -103,91 +103,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: office_table_0
-      rect:
-        serializedVersion: 2
-        x: 1061
-        y: 946
-        width: 549
-        height: 303
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2137937e0eb88ef4e9d1a43bbe49d614
-      internalID: -1591782265
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: office_table_1
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 93
-        width: 129
-        height: 767
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6f4f4771f4aaf5a4eb876abc172defb5
-      internalID: -940166250
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: office_table_2
-      rect:
-        serializedVersion: 2
-        x: 162
-        y: 93
-        width: 129
-        height: 767
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 20f39b8655813274483f6d9394ed6218
-      internalID: 1904676754
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: office_table_3
-      rect:
-        serializedVersion: 2
-        x: 307
-        y: 101
-        width: 1564
-        height: 822
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6ca601f613429d8469d18e4f2c49f3f9
-      internalID: -2078067549
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -198,11 +114,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      office_table_0: -1591782265
-      office_table_1: -940166250
-      office_table_3: -2078067549
-      office_table_2: 1904676754
+    nameFileIdTable: {}
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
