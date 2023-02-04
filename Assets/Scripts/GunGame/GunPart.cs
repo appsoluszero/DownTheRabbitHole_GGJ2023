@@ -8,20 +8,26 @@ using UnityEngine.UI;
 public class GunPart : MonoBehaviour
 {
     // check if there's checker
-    bool designated = false;
+    public GunPartChecker equipTo;
+
+    // part setting
+    public GunMinigame.GunPartType gunPartType;
+    [SerializeField] private float radius;
+    [SerializeField] private Vector2 anchorOffset;
 
     // ref
     DragAndDrop dnd;
     Image image;
-
-    // part setting
-    public GunMinigame.GunPartType gunPart;
-    [SerializeField] private float radius;
-    [SerializeField] private Vector2 anchorOffset;
+    GunMinigame gunMinigame;
 
     void Awake() {
         dnd = GetComponent<DragAndDrop> ();
         image = GetComponent<Image> ();
+    }
+
+    void Start() {
+        gunMinigame = GunMinigame.instance;
+        if (gunMinigame == null) Debug.Log("[Error] GunPart: no GunMinigame's instance is found!");
     }
 
     void Update() {
@@ -38,11 +44,15 @@ public class GunPart : MonoBehaviour
             dnd.isOverriden = true;
             dnd.overridePosition = GetOverridePosition(c);
 
-            designated = true;
+            // establish pairing
+            c.equippedGunPart = this;
+            equipTo = c;
         } else {
             dnd.isOverriden = false;
 
-            designated = false;
+            // remove pairing
+            if (equipTo != null) equipTo.equippedGunPart = null;
+            equipTo = null;
         }
     }
 
@@ -53,6 +63,9 @@ public class GunPart : MonoBehaviour
 
         // get closest checker
         foreach (GunPartChecker c in GunPartChecker.gunPartCheckers) {
+            // if already equipped with GunPart (that is not this), skip
+            if (c.equippedGunPart != null && c.equippedGunPart != this) continue;
+
             float newDist = Vector2.Distance(dnd.targetAnchoredPosition, c.GetComponent<RectTransform> ().anchoredPosition - GetAnchorOffset(c));
             if (newDist < dist) {
                 dist = newDist;
@@ -67,28 +80,7 @@ public class GunPart : MonoBehaviour
     }
 
 
-
     Vector2 GetOverridePosition(GunPartChecker c) {
-        // Rect image1rect = this.transform.GetComponent<RectTransform>().rect;
-        // Rect image2rect = c.transform.GetComponent<RectTransform>().rect;
-        // RectTransform image1rt = this.transform.GetComponent<RectTransform>();
-        // RectTransform image2rt = c.transform.GetComponent<RectTransform>();
-
-        // switch (c.snapOrientation) {
-        //     case GunPartChecker.SnapOrientation.Top:
-        //         c.gameObject.
-        //         break;
-        //     case GunPartChecker.SnapOrientation.Bottom:
-
-        //         break;
-        //     case GunPartChecker.SnapOrientation.Left:
-
-        //         break;
-        //     case GunPartChecker.SnapOrientation.Right:
-
-        //         break;
-        // }
-
         return c.GetComponent<RectTransform> ().anchoredPosition - GetAnchorOffset(c);
     }
 
@@ -113,4 +105,25 @@ public class GunPart : MonoBehaviour
 
         return offset;
     }
+
+    public void Reset() {
+        equipTo = null;
+        dnd.isOverriden = false;
+    }
+
+    // just incase you want to check when the last part is assembled
+    /*
+    void OnEnable() {
+        dnd.endDragEvent += GunMinigameCheck;
+    }
+
+    void OnDisable() {
+        dnd.endDragEvent -= GunMinigameCheck;
+    }
+
+    void GunMinigameCheck() {
+        // just incase you want to check when the last part is assembled
+        gunMinigame.Check();
+    }
+    */
 }

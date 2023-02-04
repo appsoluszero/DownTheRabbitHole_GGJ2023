@@ -11,12 +11,17 @@ public class GunPartChecker : MonoBehaviour
     // checker setting
     public enum SnapOrientation {Top, Bottom, Left, Right};
     public SnapOrientation snapOrientation;
-    public GunMinigame.GunPartType part;
+    public GunMinigame.GunPartType gunPartType;
+    [HideInInspector] public GunPart equippedGunPart;
 
     // public accessible image component
     [HideInInspector] public Image image;
 
     void Awake() {
         gunPartCheckers.Add(this);
+    }
+
+    public void Reset() {
+        equippedGunPart = null;
     }
 }

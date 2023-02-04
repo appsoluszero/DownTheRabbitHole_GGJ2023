@@ -20,6 +20,10 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     private RectTransform rectTransform;
     [HideInInspector] public Vector2 targetAnchoredPosition = Vector2.zero;
 
+    // event
+    public delegate void EndDragEvent();
+    public EndDragEvent endDragEvent;
+
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -44,6 +48,9 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     {
         // Debug.Log("OnEndDrag");
         isDragged = false;
+
+        // event
+        endDragEvent?.Invoke();
     }
 
     public void OnPointerDown(PointerEventData eventData)
