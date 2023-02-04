@@ -2,11 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class DNAMinigame : MonoBehaviour
 {
     // singleton
     public static DNAMinigame instance;
+
+    [Header("Minigame Settings")]
+    [SerializeField] private bool playGameOnStart = false;
+    [SerializeField] private UnityEvent gameSuccessEvent;
+    [SerializeField] private UnityEvent gameFailEvent;
 
     [Header("Open Minigame Setting")]
     [SerializeField] private GameObject minigameContainer;
@@ -42,6 +48,8 @@ public class DNAMinigame : MonoBehaviour
     void Start() {
         SetDNAParts();
         SetInitialAnchors();
+        if (playGameOnStart) StartMinigame();
+        else CloseContainer();
     }
 
     public static void StartMinigameStatic() => instance.StartMinigame();
@@ -132,7 +140,14 @@ public class DNAMinigame : MonoBehaviour
     }
 
     public void Check() {
-        if (point >= 98) Debug.Log("DNA success");
+        if (point >= 98) {
+            Debug.Log("[Debug] DNAMinigame: done, success");
+            gameSuccessEvent.Invoke();
+        }
+        else {
+            Debug.Log("[Debug] DNAMinigame: done, fail");
+            gameFailEvent.Invoke();
+        }
     }
     #endregion
     

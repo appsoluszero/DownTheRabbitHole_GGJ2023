@@ -11,6 +11,8 @@ public class PlayerDialogue : MonoBehaviour
     [Header("Detection Settings")]
     public float radius = 1;
     public GameObject icon;
+    public bool iconAtTrigger = false;
+    private Vector3 iconOffset;
 
     [Header("Dialogue Options")]
     public int day = 1;
@@ -34,6 +36,8 @@ public class PlayerDialogue : MonoBehaviour
         if (ui == null) Debug.Log("[Error] DialogueUI instance not found!");
 
         ui.HideUI();
+
+        iconOffset = icon.transform.localPosition;
     }
 
     //==============================Detect Dialogue==============================
@@ -43,8 +47,17 @@ public class PlayerDialogue : MonoBehaviour
         if (dialogue == null) UpdateDetectTrigger();
         
         // show icon
-        if (trigger != null) icon.SetActive(true);
-        else icon.SetActive(false);
+        if (icon != null) {
+            if (trigger != null) {
+                icon.SetActive(true);
+                if (iconAtTrigger) {
+                    icon.transform.position = trigger.gameObject.transform.position + iconOffset;
+                } else {
+                    icon.transform.position = transform.position + iconOffset;
+                }
+            }
+            else icon.SetActive(false);
+        }
 
         // if not typing, inputImpulse is false
         if (!isTyping) inputImpulse = false;
