@@ -9,7 +9,6 @@ public class LobbyGame_PlayerScript : MonoBehaviour
     private InputAction walkAction, interactAction;
 
     private Rigidbody2D rb;
-
     public float moveSpeed;
 
     void Start()
@@ -17,6 +16,7 @@ public class LobbyGame_PlayerScript : MonoBehaviour
         _playerInput = GetComponent<PlayerInput>();
         walkAction = _playerInput.actions["Move"];
         interactAction = _playerInput.actions["Interact"];
+        interactAction.performed += OnInteract;
 
         rb = GetComponent<Rigidbody2D>();
     }
@@ -25,5 +25,10 @@ public class LobbyGame_PlayerScript : MonoBehaviour
     {
         var dir = walkAction.ReadValue<Vector2>() * moveSpeed;
         rb.velocity = dir;
+    }
+
+    void OnInteract(InputAction.CallbackContext ctx) 
+    {
+        var toGo = DTRH_GameManager._instance.currentRoomType;
     }
 }
