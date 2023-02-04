@@ -8,12 +8,11 @@ using UnityEngine.UI;
 public class GunPart : MonoBehaviour
 {
     // check if there's checker
-    public GunPartChecker equipTo;
+    [HideInInspector] public GunPartChecker equipTo;
 
     // part setting
     public GunMinigame.GunPartType gunPartType;
     [SerializeField] private float radius;
-    [SerializeField] private Vector2 anchorOffset;
 
     // ref
     DragAndDrop dnd;
@@ -34,7 +33,7 @@ public class GunPart : MonoBehaviour
         if (dnd.isDragged) UpdateDetectChecker();
     }
 
-    // detect if there's checker near by, if yes, snap to it
+    // detect if there's a checkers nearby, if yes, snap to it
     void UpdateDetectChecker() {
         // detect
         GunPartChecker c = DetectChecker();
@@ -65,7 +64,8 @@ public class GunPart : MonoBehaviour
         foreach (GunPartChecker c in GunPartChecker.gunPartCheckers) {
             // if already equipped with GunPart (that is not this), skip
             if (c.equippedGunPart != null && c.equippedGunPart != this) continue;
-
+            
+            // could have use SqrMagnitube, but ummmmm no
             float newDist = Vector2.Distance(dnd.targetAnchoredPosition, c.GetComponent<RectTransform> ().anchoredPosition - GetAnchorOffset(c));
             if (newDist < dist) {
                 dist = newDist;

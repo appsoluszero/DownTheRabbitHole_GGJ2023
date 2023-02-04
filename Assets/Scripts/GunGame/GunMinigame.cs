@@ -12,6 +12,9 @@ public class GunMinigame : MonoBehaviour
     [Header("Minigame Settings")]
     [SerializeField] private bool randomStartingPosition = true;
 
+    [Header("Open Minigame Setting")]
+    [SerializeField] private GameObject minigameContainer;
+
     [Header("Components")]
     [SerializeField] private GunPartChecker[] checkers;
     [SerializeField] private GunPart[] gunParts;
@@ -26,19 +29,32 @@ public class GunMinigame : MonoBehaviour
         }
     }
 
+    //==============================Open Game==============================
+    #region Open Game
+    void OpenContainer() => minigameContainer.SetActive(true);
+    public void CloseContainer() => minigameContainer.SetActive(false);
+    #endregion
+    //==============================Start Game==============================
+    #region Start Game
     void Start() {
         SetInitialAnchors();
-        StartMinigame();
+        // StartMinigame();
     }
 
     public static void StartMinigameStatic() => instance.StartMinigame();
 
     public void StartMinigame() {
+        // open
+        OpenContainer();
+
+        // prep
         ResetGame();
         if (randomStartingPosition) RandomGunPartPositions();
     }
     
     void SetInitialAnchors() {
+        initialAnchors.Clear();
+
         // get all anchor positions
         for (int i = 0; i < gunParts.Length; i++) {
             initialAnchors.Add(gunParts[i].GetComponent<RectTransform>().anchoredPosition);
@@ -66,7 +82,9 @@ public class GunMinigame : MonoBehaviour
             anchors.RemoveAt(rand);
         }
     }
-
+    #endregion
+    //==============================Check Game==============================
+    #region Check Game
     public void Check() {
         // check for checkers being empty
         if (checkers.Length < 1) {
@@ -93,10 +111,10 @@ public class GunMinigame : MonoBehaviour
             }
         }
         if (isCorrect) {
-            Debug.Log("Yessss");
+            Debug.Log("[Debug] GunMinigame: done, success");
         } else {
-            Debug.Log("Noooo");
+            Debug.Log("[Debug] GunMinigame: done, fail");
         }
     }
-
+    #endregion
 }

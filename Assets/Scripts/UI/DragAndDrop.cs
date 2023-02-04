@@ -35,6 +35,9 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         isDragged = true;
 
         targetAnchoredPosition = rectTransform.anchoredPosition;
+
+        // bring to front
+        transform.SetAsLastSibling();
     }
 
     public void OnDrag(PointerEventData eventData)
