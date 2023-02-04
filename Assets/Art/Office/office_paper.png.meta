@@ -108,7 +108,7 @@ TextureImporter:
       name: office_paper_0
       rect:
         serializedVersion: 2
-        x: 26
+        x: 28
         y: 30
         width: 335
         height: 468
@@ -119,8 +119,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9d5f18c2601087346aa3be2319c48dff
-      internalID: 1234536860
+      spriteID: 8fc6b915a6e99ab4483dc14534e583a4
+      internalID: 409675573
       vertices: []
       indices: 
       edges: []
@@ -129,7 +129,7 @@ TextureImporter:
       name: office_paper_1
       rect:
         serializedVersion: 2
-        x: 388
+        x: 390
         y: 30
         width: 335
         height: 468
@@ -140,8 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8384ebc18d272584db311bb66fe0710b
-      internalID: 688809711
+      spriteID: 15a9066dee48a004697207cd27d42c1f
+      internalID: -1080241089
       vertices: []
       indices: 
       edges: []
@@ -150,7 +150,7 @@ TextureImporter:
       name: office_paper_2
       rect:
         serializedVersion: 2
-        x: 748
+        x: 750
         y: 30
         width: 335
         height: 468
@@ -161,8 +161,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b3bd5c3705fd0a54d9a5f60f2b53ff0f
-      internalID: -490950700
+      spriteID: 75c217b029016e9499c580c9a602498d
+      internalID: -1495670170
       vertices: []
       indices: 
       edges: []
@@ -178,9 +178,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      office_paper_0: 1234536860
-      office_paper_2: -490950700
-      office_paper_1: 688809711
+      office_paper_0: 409675573
+      office_paper_2: -1495670170
+      office_paper_1: -1080241089
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

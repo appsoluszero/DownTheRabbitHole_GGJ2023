@@ -105,10 +105,10 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: office_table 1_0
+      name: office_table_0
       rect:
         serializedVersion: 2
-        x: 1061
+        x: 1062
         y: 918
         width: 550
         height: 303
@@ -119,17 +119,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f97fd78f9044c9c41b66c8b3644dd72d
-      internalID: 46717633
+      spriteID: 9b65e5ad8d746e741bb95e832d1b69c7
+      internalID: -1624080934
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: office_table 1_1
+      name: office_table_1
       rect:
         serializedVersion: 2
-        x: 16
+        x: 17
         y: 65
         width: 129
         height: 767
@@ -140,17 +140,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0a8e894f910dab04dae61fcbb8ce5880
-      internalID: 993667235
+      spriteID: 026b2753b49937a42bf94734d567e3c3
+      internalID: -78532124
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: office_table 1_2
+      name: office_table_2
       rect:
         serializedVersion: 2
-        x: 162
+        x: 163
         y: 65
         width: 129
         height: 767
@@ -161,17 +161,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ad36d3c6458e34f44989eb23b58cc794
-      internalID: 1202924809
+      spriteID: ece31f9fda0889744898c1806a7c95fa
+      internalID: -1769519751
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: office_table 1_3
+      name: office_table_3
       rect:
         serializedVersion: 2
-        x: 307
+        x: 308
         y: 73
         width: 1320
         height: 822
@@ -182,8 +182,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 117202f2fb4abbd4aa119e0c91bc53f4
-      internalID: -1319841911
+      spriteID: 17e3fa7387964594fa8b16f7e0e9c19c
+      internalID: -1958605096
       vertices: []
       indices: 
       edges: []
@@ -199,10 +199,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      office_table 1_2: 1202924809
-      office_table 1_3: -1319841911
-      office_table 1_0: 46717633
-      office_table 1_1: 993667235
+      office_table_0: -1624080934
+      office_table_1: -78532124
+      office_table_3: -1958605096
+      office_table_2: -1769519751
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
