@@ -1,34 +1,51 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 
-public class ProjectProposalGame_PaperScript : MonoBehaviour, IPointerDownHandler, IDragHandler
+public class ProjectProposalGame_PaperScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
     private RectTransform rectTransform;
-    private Vector2 mousePos, mouseOffset;
+    public bool AbleToSubmit;
 
     void Start() 
     {
         rectTransform = GetComponent<RectTransform>();
     }
 
+    #region Dragging
+    private Vector2 mouseOffset;
     public void OnPointerDown(PointerEventData ped) 
     {
-        mousePos = ped.position;
-        mousePos.x *= 1280f/Screen.width;
-        mousePos.y *= 720f/Screen.height;
-        mouseOffset = mousePos - rectTransform.anchoredPosition;
+        if(ProjectProposalGame_StateHandler._instance.currentGameState != ProjectProposalGame_StateHandler.GameState.Free) 
+            return;
+        ProjectProposalGame_StateHandler._instance.currentGameState = ProjectProposalGame_StateHandler.GameState.DraggingPaper;
+        mouseOffset = ConvertTo720pRef(ped.position) - rectTransform.anchoredPosition;
         transform.SetAsLastSibling();
+    }
+
+    public void OnPointerUp(PointerEventData ped) 
+    {
+        if(ProjectProposalGame_StateHandler._instance.currentGameState != ProjectProposalGame_StateHandler.GameState.DraggingPaper) 
+            return;
+        ProjectProposalGame_StateHandler._instance.currentGameState = ProjectProposalGame_StateHandler.GameState.Free;
+        if(AbleToSubmit)
+            ProjectProposalGame_StateHandler._instance.SubmitPaper(IsCorrect);
     }
 
     public void OnDrag(PointerEventData ped) 
     {
-        mousePos = ped.position;
-        mousePos.x *= 1280f/Screen.width;
-        mousePos.y *= 720f/Screen.height;
-        mousePos -= mouseOffset;
-        GetComponent<RectTransform>().anchoredPosition = mousePos;
+        rectTransform.anchoredPosition = ConvertTo720pRef(ped.position) - mouseOffset;
     }
+
+    private Vector2 ConvertTo720pRef(Vector2 pos) 
+    {
+        var modifiedPos = pos;
+        modifiedPos.x *= 1280f/Screen.width;
+        modifiedPos.y *= 720f/Screen.height;
+        return modifiedPos;
+    }
+    #endregion
+
+    #region Text generation/checking
+    public bool IsCorrect;
+    #endregion
 }
