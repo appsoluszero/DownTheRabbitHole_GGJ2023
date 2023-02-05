@@ -144,13 +144,11 @@ public class DNAMinigame : MonoBehaviour
             Debug.Log("[Debug] DNAMinigame: done, success");
             DTRH_GameManager._instance.rodyScore++;
             gameSuccessEvent.Invoke();
-        }
-        /*
+        } 
         else {
             Debug.Log("[Debug] DNAMinigame: done, fail");
             gameFailEvent.Invoke();
         }
-        */
     }
     #endregion
     

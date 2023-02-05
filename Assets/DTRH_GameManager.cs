@@ -22,9 +22,13 @@ public class DTRH_GameManager : MonoBehaviour
 
     [Header("Room UI")]
     public GameObject AdminOfficeUI;
+    public GameObject AdminOfficeReadyIcon;
     public GameObject DNAOfficeUI;
+    public GameObject DNAOfficeReadyIcon;
     public GameObject WeaponDevUI;
+    public GameObject WeaponDevReadyIcon;
     public GameObject CarrotGardenUI;
+    public GameObject CarrotGardenReadyIcon;
 
     [Header("Game Loop")]
     public static int day = 1;
@@ -71,6 +75,26 @@ public class DTRH_GameManager : MonoBehaviour
         if (gameTimerRunnning) {
             UpdateGameLoop();
         }
+
+        UpdateReadyIcon();
+    }
+
+    void UpdateReadyIcon() {
+        if (gamePhase == GamePhase.Work && gameTimerRunnning) {
+            if (gameTimer.proposalGameTimer <= 0) AdminOfficeReadyIcon.SetActive(true);
+            else AdminOfficeReadyIcon.SetActive(false);
+            if (gameTimer.carrotGameTimer <= 0) CarrotGardenReadyIcon.SetActive(true);
+            else CarrotGardenReadyIcon.SetActive(false);
+            if (gameTimer.dnaGameTimer <= 0) DNAOfficeReadyIcon.SetActive(true);
+            else DNAOfficeReadyIcon.SetActive(false);
+            if (gameTimer.gunGameTimer <= 0) WeaponDevReadyIcon.SetActive(true);
+            else WeaponDevReadyIcon.SetActive(false);
+        } else {
+            AdminOfficeReadyIcon.SetActive(false);
+            CarrotGardenReadyIcon.SetActive(false);
+            DNAOfficeReadyIcon.SetActive(false);
+            WeaponDevReadyIcon.SetActive(false);
+        }
     }
 
     IEnumerator StartIntroSequence() 
@@ -93,28 +117,35 @@ public class DTRH_GameManager : MonoBehaviour
         switch(currentRoomType) 
         {
             case RoomType.AdminOffice:
+                if (gameTimer.proposalGameTimer > 0) break;
                 AdminOfficeUI.SetActive(true);
                 ProjectProposalGame_StateHandler._instance.SetupToStartMinigame();
                 inMinigame = true;
+                playerChar.SetActive(false);
                 break;
             case RoomType.Garden:
+                if (gameTimer.carrotGameTimer > 0) break;
                 CarrotGardenUI.SetActive(true);
                 CarrotCheckGame_MainManager._instance.SetupToStartMinigame();
                 inMinigame = true;
+                playerChar.SetActive(false);
                 break;
             case RoomType.RandD_Gun:
+                if (gameTimer.gunGameTimer > 0) break;
                 WeaponDevUI.SetActive(true);
                 GunMinigame.StartMinigameStatic();
                 inMinigame = true;
+                playerChar.SetActive(false);
                 break;
             case RoomType.RandD_DNA:
+                if (gameTimer.dnaGameTimer > 0) break;
                 DNAOfficeUI.SetActive(true);
                 DNAMinigame.StartMinigameStatic();
                 inMinigame = true;
+                playerChar.SetActive(false);
                 break;
                 
         }
-        playerChar.SetActive(false);
     }
 
     // call when exit minigame room

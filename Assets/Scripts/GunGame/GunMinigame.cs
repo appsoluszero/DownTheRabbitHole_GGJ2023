@@ -105,7 +105,11 @@ public class GunMinigame : MonoBehaviour
                 break;
             }
         }
-        if (!isComplete) return;
+        if (!isComplete) {
+            // return;
+            Debug.Log("[Debug] GunMinigame: done, fail");
+            gameFailEvent.Invoke();
+        }
 
         // check for correction
         bool isCorrect = true;
