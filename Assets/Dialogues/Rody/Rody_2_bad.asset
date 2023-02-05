@@ -10,11 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79557833dc09c491caa5c1035f4d9108, type: 3}
-  m_Name: Roy_3_bad
+  m_Name: Rody_2_bad
   m_EditorClassIdentifier: 
   texts:
-  - name: Roy
-    sentence: What the hell! You ruined my invention! It's the only thing that keeps
-      me from going insane, and you ruined it!
-  - name: Roy
-    sentence: I don't work with people who don't give a crap about me, that's a warning!
+  - name: Rody
+    sentence: Ah, this is killing me.... These engineers.. they're incapable, and
+      incompetent!
+  - name: Rody
+    sentence: But wait... maybe...
+  - name: Rody
+    sentence: Oh! prez. You startled me, hehe... heh... Yeah, we aren't doing to
+      good right now. I'll manage though

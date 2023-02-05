@@ -82,6 +82,7 @@ public class DNAMinigame : MonoBehaviour
     }
 
     void ResetGame() {
+        pointSlider.value = 0;
         point = 0;
         int n = 3;
 

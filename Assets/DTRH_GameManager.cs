@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DTRH_GameManager : MonoBehaviour
 {
@@ -46,10 +47,13 @@ public class DTRH_GameManager : MonoBehaviour
     [Header("Score system")]
     public int cultistScore = 0;
     public int cultistHappyThreshold = 7;
+    public DialogueTrigger cultistTrigger;
     public int royScore = 0;
     public int royHappyThreshold = 9;
+    public DialogueTrigger royTrigger;
     public int rodyScore = 0;
     public int rodyHappyThreshold = 5;
+    public DialogueTrigger rodyTrigger;
 
     void Awake()
     {
@@ -69,6 +73,13 @@ public class DTRH_GameManager : MonoBehaviour
     {
         OnIntroEnd += IntroEnd;
         StartCoroutine(StartIntroSequence());
+
+        // Start game loop
+        OnIntroEnd += StartGameLoop;
+
+        if (!cultistTrigger) Debug.Log("Cultist's Dialogue Trigger not found");
+        if (!royTrigger) Debug.Log("Roy's Dialogue Trigger not found");
+        if (!rodyTrigger) Debug.Log("Rody's Dialogue Trigger not found");
     }
 
     void Update() {
@@ -77,6 +88,32 @@ public class DTRH_GameManager : MonoBehaviour
         }
 
         UpdateReadyIcon();
+
+        UpdateScore();
+
+        if (gamePhase == GamePhase.Afterwork) ExitDoor.SetActive(true);
+        else ExitDoor.SetActive(false);
+    }
+
+    void UpdateScore() {
+        if (gamePhase != GamePhase.Afterwork) {
+            if (cultistTrigger) cultistTrigger.gameObject.SetActive(false);
+            if (royTrigger) royTrigger.gameObject.SetActive(false);
+            if (rodyTrigger) rodyTrigger.gameObject.SetActive(false);
+            return;
+        }
+        if (cultistTrigger) {
+            cultistTrigger.gameObject.SetActive(true);
+            cultistTrigger.isBad = !(cultistScore >= cultistHappyThreshold);
+        }
+        if (royTrigger) {
+            royTrigger.gameObject.SetActive(true);
+            royTrigger.isBad = !(royScore >= royHappyThreshold);
+        }
+        if (rodyTrigger) {
+            rodyTrigger.gameObject.SetActive(true);
+            rodyTrigger.isBad = !(rodyScore >= rodyHappyThreshold);
+        }
     }
 
     void UpdateReadyIcon() {
@@ -110,44 +147,57 @@ public class DTRH_GameManager : MonoBehaviour
         audioPlayer.Play();
     }
 
+    public UnityEvent ExitEvent;
+    public GameObject ExitDoor;
     public void EnterRoom() 
     {
         // assuming EnterRoom() is only used for entering minigame
-        if (gamePhase != GamePhase.Work) return;
-        switch(currentRoomType) 
-        {
-            case RoomType.AdminOffice:
-                if (gameTimer.proposalGameTimer > 0) break;
-                AdminOfficeUI.SetActive(true);
-                ProjectProposalGame_StateHandler._instance.SetupToStartMinigame();
-                inMinigame = true;
-                playerChar.SetActive(false);
-                break;
-            case RoomType.Garden:
-                if (gameTimer.carrotGameTimer > 0) break;
-                CarrotGardenUI.SetActive(true);
-                CarrotCheckGame_MainManager._instance.SetupToStartMinigame();
-                inMinigame = true;
-                playerChar.SetActive(false);
-                break;
-            case RoomType.RandD_Gun:
-                if (gameTimer.gunGameTimer > 0) break;
-                WeaponDevUI.SetActive(true);
-                GunMinigame.StartMinigameStatic();
-                inMinigame = true;
-                playerChar.SetActive(false);
-                break;
-            case RoomType.RandD_DNA:
-                if (gameTimer.dnaGameTimer > 0) break;
-                DNAOfficeUI.SetActive(true);
-                DNAMinigame.StartMinigameStatic();
-                inMinigame = true;
-                playerChar.SetActive(false);
-                break;
-            case RoomType.Exit:
-                //Do the exit
-                break;
-                
+        if (gamePhase == GamePhase.Work) {
+            switch(currentRoomType) 
+            {
+                case RoomType.AdminOffice:
+                    if (gameTimer.proposalGameTimer > 0) break;
+                    AdminOfficeUI.SetActive(true);
+                    ProjectProposalGame_StateHandler._instance.SetupToStartMinigame();
+                    inMinigame = true;
+                    playerChar.SetActive(false);
+                    break;
+                case RoomType.Garden:
+                    if (gameTimer.carrotGameTimer > 0) break;
+                    CarrotGardenUI.SetActive(true);
+                    CarrotCheckGame_MainManager._instance.SetupToStartMinigame();
+                    inMinigame = true;
+                    playerChar.SetActive(false);
+                    break;
+                case RoomType.RandD_Gun:
+                    if (gameTimer.gunGameTimer > 0) break;
+                    WeaponDevUI.SetActive(true);
+                    GunMinigame.StartMinigameStatic();
+                    inMinigame = true;
+                    playerChar.SetActive(false);
+                    break;
+                case RoomType.RandD_DNA:
+                    if (gameTimer.dnaGameTimer > 0) break;
+                    DNAOfficeUI.SetActive(true);
+                    DNAMinigame.StartMinigameStatic();
+                    inMinigame = true;
+                    playerChar.SetActive(false);
+                    break;
+                case RoomType.Exit:
+                    //Do the exit
+                    ExitEvent.Invoke();
+                    break;
+                    
+            }
+        } else {
+            switch(currentRoomType) 
+            {
+                case RoomType.Exit:
+                    //Do the exit
+                    ExitEvent.Invoke();
+                    break;
+                    
+            }
         }
     }
 
@@ -203,7 +253,8 @@ public class DTRH_GameManager : MonoBehaviour
         if (gameTimer.dayTimer <= 0 && gamePhase == GamePhase.Work) {
             // time's up for the day
             timeoutObject.gameObject.SetActive(true);
-            LeanTween.moveY(timeoutObject, 0, timeToMove).setEase(easeType).setOnComplete(_ => StartCoroutine(timeoutSequence()));
+            // LeanTween.moveY(timeoutObject, 0, timeToMove).setEase(easeType).setOnComplete(_ => StartCoroutine(timeoutSequence()));
+            StartCoroutine(timeoutSequence());
         }
 
         // update the timer

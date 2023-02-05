@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79557833dc09c491caa5c1035f4d9108, type: 3}
-  m_Name: Roy_3_bad
+  m_Name: Roy_4_good
   m_EditorClassIdentifier: 
   texts:
-  - name: Roy
-    sentence: What the hell! You ruined my invention! It's the only thing that keeps
-      me from going insane, and you ruined it!
-  - name: Roy
-    sentence: I don't work with people who don't give a crap about me, that's a warning!
+  - name: Cultist
+    sentence: You did well. The prophecy is becoming true. We are going to back to
+      our root, where the rabbit dominates the world.
+  - name: Cultist
+    sentence: You are welcome to join the New World Order, and shape this world together
+      with us

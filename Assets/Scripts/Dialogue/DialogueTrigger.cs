@@ -13,6 +13,9 @@ public class DialogueTrigger : MonoBehaviour
     [Header("Dialogues")]
     public DialogueByDay[] dialogues;
 
+    [Header("Condition")]
+    public bool isBad = false;
+
     void OnEnable() {
         activeDialogueTrigger.Add(this);
     }

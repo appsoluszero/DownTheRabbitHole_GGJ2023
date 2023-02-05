@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79557833dc09c491caa5c1035f4d9108, type: 3}
-  m_Name: Roy_3_bad
+  m_Name: Roy_3_good
   m_EditorClassIdentifier: 
   texts:
   - name: Roy
-    sentence: What the hell! You ruined my invention! It's the only thing that keeps
-      me from going insane, and you ruined it!
+    sentence: I did it...! I cracked the code! No more starvation in our rabbit nation!
+      Ha ha ha ha!
   - name: Roy
-    sentence: I don't work with people who don't give a crap about me, that's a warning!
+    sentence: President! Am I glad to see you right now!

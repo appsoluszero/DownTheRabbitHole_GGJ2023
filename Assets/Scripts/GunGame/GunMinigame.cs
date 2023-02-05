@@ -20,7 +20,7 @@ public class GunMinigame : MonoBehaviour
     [SerializeField] private GameObject minigameContainer;
 
     [Header("Components")]
-    [SerializeField] private GunPartChecker[] checkers;
+    public GunPartChecker[] checkers;
     [SerializeField] private GunPart[] gunParts;
     private List<Vector2> initialAnchors = new List<Vector2> ();
 
@@ -44,6 +44,14 @@ public class GunMinigame : MonoBehaviour
         SetInitialAnchors();
         if (playGameOnStart) StartMinigame();
         else CloseContainer();
+    }
+
+    void Update() {
+        foreach (GunPartChecker c in checkers) {
+            if (c.equippedGunPart != null) {
+                if (c.equippedGunPart.equipTo != c) c.equippedGunPart = null;
+            }
+        }
     }
 
     public static void StartMinigameStatic() => instance.StartMinigame();

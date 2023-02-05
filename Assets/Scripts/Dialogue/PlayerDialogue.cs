@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using TMPro;
 
 public class PlayerDialogue : MonoBehaviour
@@ -15,8 +16,6 @@ public class PlayerDialogue : MonoBehaviour
     private Vector3 iconOffset;
 
     [Header("Dialogue Options")]
-    public int day = 1;
-    public bool isBad = false;
 
     // current dialogue
     DialogueTrigger trigger;
@@ -28,6 +27,8 @@ public class PlayerDialogue : MonoBehaviour
     float textLetterDelay = 0.02f;
     bool inputImpulse = false;
 
+    public InputAction interact;
+
     // ref
     DialogueUI ui;
     
@@ -38,6 +39,8 @@ public class PlayerDialogue : MonoBehaviour
         ui.HideUI();
 
         iconOffset = icon.transform.localPosition;
+
+        //interact.performed += OnDialogueNextInput;
     }
 
     //==============================Detect Dialogue==============================
@@ -61,6 +64,10 @@ public class PlayerDialogue : MonoBehaviour
 
         // if not typing, inputImpulse is false
         if (!isTyping) inputImpulse = false;
+
+        if (Input.GetKeyDown(KeyCode.E)) {
+            OnDialogueNextInput();
+        }
     }
 
     void UpdateDetectTrigger() {
@@ -84,6 +91,7 @@ public class PlayerDialogue : MonoBehaviour
     //==============================Play Dialogue==============================
     #region Play
     public void OnDialogueNextInput() {
+
         // case already playing dialogue
         if (dialogue != null) {
             if (isTyping) inputImpulse = true;
@@ -96,7 +104,7 @@ public class PlayerDialogue : MonoBehaviour
         if (trigger == null) return;
 
         // get dialogue
-        dialogue = GetDialogue(trigger, day, isBad);
+        dialogue = GetDialogue(trigger, DTRH_GameManager.day, trigger.isBad);
         if (dialogue == null) return;
 
         // start dialogue
