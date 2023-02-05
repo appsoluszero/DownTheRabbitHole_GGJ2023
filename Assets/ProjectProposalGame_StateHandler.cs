@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class ProjectProposalGame_StateHandler : MonoBehaviour
@@ -15,6 +14,9 @@ public class ProjectProposalGame_StateHandler : MonoBehaviour
     public GameState currentGameState;
 
     public ProjectProposalGame_SubmitterScript correctSubmitter, incorrectSubmitter;
+    public bool GameInSession;
+
+    public Action OnPaperSubmitted;
 
     void Awake() 
     {
@@ -30,17 +32,29 @@ public class ProjectProposalGame_StateHandler : MonoBehaviour
         }
     }
 
-    public void SubmitPaper(bool truthValue) 
+    public void SubmitPaper(ProjectProposalGame_PaperScript paper) 
     {
         if(correctSubmitter.IsWaitingForSubmit && !incorrectSubmitter.IsWaitingForSubmit) 
         {
-            if(truthValue) print("correct");
-            else print("incorrect");
+            if(paper.IsCorrect) {
+                print("correct");
+                LeanTween.move(paper.rectTransform, new Vector3(-500, 300, 0), 1).setOnStart(OnPaperSubmitted);
+            } 
+            else {
+                print("incorrect");
+                LeanTween.move(paper.rectTransform, new Vector3(-500, 300, 0), 1).setOnStart(OnPaperSubmitted);
+            } 
         }
         else if(!correctSubmitter.IsWaitingForSubmit && incorrectSubmitter.IsWaitingForSubmit) 
         {
-            if(!truthValue) print("correct");
-            else print("incorrect");
+            if(!paper.IsCorrect) {
+                print("correct");
+                LeanTween.move(paper.rectTransform, new Vector3(500 + 1280, 300, 0), 1).setOnStart(OnPaperSubmitted);
+            } 
+            else {
+                print("incorrect");
+                LeanTween.move(paper.rectTransform, new Vector3(500 + 1280, 300, 0), 1).setOnStart(OnPaperSubmitted);
+            } 
         }
     }
 }

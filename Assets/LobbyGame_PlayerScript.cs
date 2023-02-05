@@ -5,13 +5,13 @@ using UnityEngine.InputSystem;
 
 public class LobbyGame_PlayerScript : MonoBehaviour
 {
-    private PlayerInput _playerInput;
-    private InputAction walkAction, interactAction;
+    [HideInInspector] public PlayerInput _playerInput;
+    [HideInInspector] public InputAction walkAction, interactAction;
 
     private Rigidbody2D rb;
     public float moveSpeed;
 
-    void Start()
+    void OnEnable()
     {
         _playerInput = GetComponent<PlayerInput>();
         walkAction = _playerInput.actions["Move"];
@@ -29,6 +29,6 @@ public class LobbyGame_PlayerScript : MonoBehaviour
 
     void OnInteract(InputAction.CallbackContext ctx) 
     {
-        var toGo = DTRH_GameManager._instance.currentRoomType;
+        DTRH_GameManager._instance.EnterRoom();
     }
 }

@@ -11,6 +11,14 @@ public class DTRH_GameManager : MonoBehaviour
     public LeanTweenType easeType;
     private Action OnIntroEnd;
     public RoomType currentRoomType;
+    [Header("Player")]
+    public GameObject playerChar;
+
+    [Header("Room UI")]
+    public GameObject AdminOfficeUI;
+    public GameObject DNAOfficeUI;
+    public GameObject WeaponDevUI;
+    public GameObject CarrotGardenUI;
 
     void Awake()
     {
@@ -41,6 +49,21 @@ public class DTRH_GameManager : MonoBehaviour
     void IntroEnd() 
     {
         introObject.gameObject.SetActive(false);
+    }
+
+    public void EnterRoom() 
+    {
+        playerChar.SetActive(false);
+        switch(currentRoomType) 
+        {
+            case RoomType.AdminOffice:
+                AdminOfficeUI.SetActive(true);
+                return;
+            case RoomType.Garden:
+                CarrotGardenUI.SetActive(true);
+                return;
+                
+        }
     }
 }
 

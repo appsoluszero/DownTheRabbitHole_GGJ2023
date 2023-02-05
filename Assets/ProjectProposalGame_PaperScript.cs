@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 public class ProjectProposalGame_PaperScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
-    private RectTransform rectTransform;
+    public RectTransform rectTransform;
     public bool AbleToSubmit;
 
     void Start() 
@@ -28,7 +28,7 @@ public class ProjectProposalGame_PaperScript : MonoBehaviour, IPointerDownHandle
             return;
         ProjectProposalGame_StateHandler._instance.currentGameState = ProjectProposalGame_StateHandler.GameState.Free;
         if(AbleToSubmit)
-            ProjectProposalGame_StateHandler._instance.SubmitPaper(IsCorrect);
+            ProjectProposalGame_StateHandler._instance.SubmitPaper(this);
     }
 
     public void OnDrag(PointerEventData ped) 
