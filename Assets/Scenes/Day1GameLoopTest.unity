@@ -1009,6 +1009,9 @@ MonoBehaviour:
   arrowTransform: {fileID: 413662532}
   arrowTimePerSide: 0.8
   checkingSize: 46
+  goodCarrotSprite: {fileID: 0}
+  badCarrotSpriteList: []
+  carrotImage: {fileID: 0}
 --- !u!1 &342795295
 GameObject:
   m_ObjectHideFlags: 0
@@ -5031,6 +5034,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 0}
   AbleToSubmit: 0
+  logo: {fileID: 0}
+  motto: {fileID: 0}
+  signature: {fileID: 0}
+  logoRight: {fileID: 0}
+  logoWrong: {fileID: 0}
+  rightMotto: 
+  wrongMotto: []
+  signatureDb: []
   IsCorrect: 0
 --- !u!114 &1695258830
 MonoBehaviour:
@@ -5336,7 +5347,9 @@ MonoBehaviour:
   currentGameState: 0
   correctSubmitter: {fileID: 1939107176}
   incorrectSubmitter: {fileID: 67352346}
-  GameInSession: 0
+  paperList: []
+  paperLocList: []
+  submitCount: 3
 --- !u!1 &1860225241
 GameObject:
   m_ObjectHideFlags: 0
