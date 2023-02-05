@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GunMinigame : MonoBehaviour
 {
@@ -10,7 +11,10 @@ public class GunMinigame : MonoBehaviour
     public enum GunPartType {Grip, Magazine, Barrel, Handle, Stock}
 
     [Header("Minigame Settings")]
+    [SerializeField] private bool playGameOnStart = false;
     [SerializeField] private bool randomStartingPosition = true;
+    [SerializeField] private UnityEvent gameSuccessEvent;
+    [SerializeField] private UnityEvent gameFailEvent;
 
     [Header("Open Minigame Setting")]
     [SerializeField] private GameObject minigameContainer;
@@ -38,7 +42,8 @@ public class GunMinigame : MonoBehaviour
     #region Start Game
     void Start() {
         SetInitialAnchors();
-        // StartMinigame();
+        if (playGameOnStart) StartMinigame();
+        else CloseContainer();
     }
 
     public static void StartMinigameStatic() => instance.StartMinigame();
@@ -112,8 +117,10 @@ public class GunMinigame : MonoBehaviour
         }
         if (isCorrect) {
             Debug.Log("[Debug] GunMinigame: done, success");
+            gameSuccessEvent.Invoke();
         } else {
             Debug.Log("[Debug] GunMinigame: done, fail");
+            gameFailEvent.Invoke();
         }
     }
     #endregion

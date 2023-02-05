@@ -11,7 +11,7 @@ public class DialogueTrigger : MonoBehaviour
     public float radius = 1;
 
     [Header("Dialogues")]
-    public DialogueByDay[] Dialogues;
+    public DialogueByDay[] dialogues;
 
     void OnEnable() {
         activeDialogueTrigger.Add(this);

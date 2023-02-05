@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GunGameTest : MonoBehaviour
 {
-    public void OpenGunMinigame() {
-        GunMinigame.instance.StartMinigame();
+    void Start() {
+        DNAMinigame.instance.StartMinigame();
     }
 }
