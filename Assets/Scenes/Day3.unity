@@ -1382,8 +1382,6 @@ MonoBehaviour:
     dialogueBad: {fileID: 11400000, guid: 14ff1efac8f3b4199b0d6e2295cad8eb, type: 2}
   - dialogueGood: {fileID: 11400000, guid: 2382d45f2fa6c48eda51f159d86d21ff, type: 2}
     dialogueBad: {fileID: 11400000, guid: 5904f610dfc5240348c766e85b195aea, type: 2}
-  - dialogueGood: {fileID: 11400000, guid: 97ac8e4480cf1492d9c74f547b849f31, type: 2}
-    dialogueBad: {fileID: 11400000, guid: 97ac8e4480cf1492d9c74f547b849f31, type: 2}
   isBad: 0
 --- !u!1 &345847933
 GameObject:
@@ -3027,8 +3025,6 @@ MonoBehaviour:
     dialogueBad: {fileID: 11400000, guid: d0e285c687a164bb59cb4cbb98f51272, type: 2}
   - dialogueGood: {fileID: 11400000, guid: aca043346da1f43cbb851b39e8d0aec9, type: 2}
     dialogueBad: {fileID: 11400000, guid: f89a548d58e1b42878b27b48d29edae4, type: 2}
-  - dialogueGood: {fileID: 11400000, guid: bdbd12df8b57444eba558e1c59af4c20, type: 2}
-    dialogueBad: {fileID: 11400000, guid: bdbd12df8b57444eba558e1c59af4c20, type: 2}
   isBad: 0
 --- !u!1 &774540581
 GameObject:
@@ -5924,6 +5920,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c353b978932042fb9fe6bb893f46b5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isLoading: 0
   loadScreen: {fileID: 0}
   loadProgress: {fileID: 0}
 --- !u!1 &1563402450

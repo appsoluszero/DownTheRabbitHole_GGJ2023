@@ -19,6 +19,7 @@ public class LobbyGame_Animation : MonoBehaviour
         playerScript = GetComponentInParent<LobbyGame_PlayerScript>();
 
         playerScript.walkAction.performed += ctx => {
+            if(animator == null) return;
             dir = ctx.ReadValue<Vector2>();
             if(dir.y > 0) {
                 animator.Play(walkUp);
@@ -37,6 +38,7 @@ public class LobbyGame_Animation : MonoBehaviour
         };
 
         playerScript.walkAction.canceled += ctx => {
+            if(animator == null) return;
             if(dir.y > 0) animator.Play(idleUp);
             else if(dir.y < 0) animator.Play(idleDown);
             else {
@@ -44,10 +46,5 @@ public class LobbyGame_Animation : MonoBehaviour
                 else animator.Play(idleDown);
             }
         };
-    }
-
-    void OnWalk(InputAction.CallbackContext ctx) 
-    {
-        
     }
 } 

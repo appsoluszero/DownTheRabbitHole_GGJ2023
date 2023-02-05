@@ -58,6 +58,7 @@ public class DTRH_GameManager : MonoBehaviour
     public int rodyScore = 0;
     public int rodyHappyThreshold = 5;
     public DialogueTrigger rodyTrigger;
+    public bool isExiting = false;
 
     void Awake()
     {
@@ -187,17 +188,15 @@ public class DTRH_GameManager : MonoBehaviour
                     inMinigame = true;
                     playerChar.SetActive(false);
                     break;
-                case RoomType.Exit:
-                    //Do the exit
-                    ExitEvent.Invoke();
-                    break;
-                    
             }
         } else {
             switch(currentRoomType) 
             {
                 case RoomType.Exit:
                     //Do the exit
+                    if(isExiting) break;
+                    isExiting = true;
+                    ProceedNextDay();
                     ExitEvent.Invoke();
                     break;
                     
