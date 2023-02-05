@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ProjectProposalGame_StateHandler : MonoBehaviour
@@ -14,9 +15,13 @@ public class ProjectProposalGame_StateHandler : MonoBehaviour
     public GameState currentGameState;
 
     public ProjectProposalGame_SubmitterScript correctSubmitter, incorrectSubmitter;
-    public bool GameInSession;
 
     public Action OnPaperSubmitted;
+
+    public List<RectTransform> paperList;
+    public List<RectTransform> paperLocList;
+
+    public int submitCount = 3;
 
     void Awake() 
     {
@@ -30,6 +35,22 @@ public class ProjectProposalGame_StateHandler : MonoBehaviour
         {
             _instance = this;
         }
+    }
+
+    void Start()
+    {
+        //SetupToStartMinigame();
+    }
+
+    //Start the minigame here
+    [ContextMenu("Starting minigame")]
+    public void SetupToStartMinigame() 
+    {
+        for(var i = 0 ; i < paperList.Count ; ++i) {
+            paperList[i].anchoredPosition = paperLocList[i].anchoredPosition;
+            paperList[i].GetComponent<ProjectProposalGame_PaperScript>().GenerateTextElement();
+        }
+        submitCount = 3;
     }
 
     public void SubmitPaper(ProjectProposalGame_PaperScript paper) 
@@ -55,6 +76,10 @@ public class ProjectProposalGame_StateHandler : MonoBehaviour
                 print("incorrect");
                 LeanTween.move(paper.rectTransform, new Vector3(500 + 1280, 300, 0), 1).setOnStart(OnPaperSubmitted);
             } 
+        }
+        submitCount--;
+        if(submitCount == 0) {
+            //minigame done this round, do whateve
         }
     }
 }
