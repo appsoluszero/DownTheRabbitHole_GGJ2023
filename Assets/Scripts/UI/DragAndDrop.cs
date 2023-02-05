@@ -27,6 +27,7 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
+        if (canvas == null) canvas = GetComponentInParent<Canvas>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
