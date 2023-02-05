@@ -45,6 +45,10 @@ public class DTRH_GameManager : MonoBehaviour
     public bool inMinigame = false;
 
     [Header("Score system")]
+    public static int cultistTotalScore;
+    public static int royTotalScore;
+    public static int rodyTotalScore;
+
     public int cultistScore = 0;
     public int cultistHappyThreshold = 7;
     public DialogueTrigger cultistTrigger;
@@ -280,8 +284,9 @@ public class DTRH_GameManager : MonoBehaviour
     void ChangeToAfterWork()
     {
         gamePhase = GamePhase.Afterwork;    
-        // TODO: change stuff to after work
-        // TODO: close all minigame
+        cultistTotalScore += cultistScore;
+        royTotalScore += royScore;
+        rodyTotalScore += rodyScore;
     }
 
     void UpdateGameTimer() {

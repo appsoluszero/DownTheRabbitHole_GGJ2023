@@ -11,13 +11,15 @@ public class MainMenu_LevelLoader : MonoBehaviour
 
     public void LoadScene() 
     {
-        loadScreen.SetActive(true);
+        if(loadScreen != null)
+            loadScreen.SetActive(true);
         StartCoroutine(loadSceneAsync(1));
     }
 
     public void LoadScene(int i) 
     {
-        loadScreen.SetActive(true);
+        if(loadScreen != null)
+            loadScreen.SetActive(true);
         StartCoroutine(loadSceneAsync(i));
     }
 
@@ -31,11 +33,20 @@ public class MainMenu_LevelLoader : MonoBehaviour
         var op = SceneManager.LoadSceneAsync(i, LoadSceneMode.Single);
         op.allowSceneActivation = false;
         while(op.progress < 0.9f) {
-            loadProgress.text = "Initializing world domination... " + (int)(op.progress/0.9f * 100) + "%";
+            if(loadProgress != null)
+                loadProgress.text = "Initializing world domination... " + (int)(op.progress/0.9f * 100) + "%";
             yield return null;
         }
-        loadProgress.text = "Initializing world domination... 100%";
+        if(loadProgress != null)
+            loadProgress.text = "Initializing world domination... 100%";
         yield return new WaitForSeconds(1.5f);
         op.allowSceneActivation = true;
+
+        if(i == 1) 
+        {
+            DTRH_GameManager.cultistTotalScore = 0;
+            DTRH_GameManager.royTotalScore = 0;
+            DTRH_GameManager.rodyTotalScore = 0;
+        }
     }
 }
