@@ -64,6 +64,7 @@ public class ProjectProposalGame_StateHandler : MonoBehaviour
             submitCount--;
             if(paper.IsCorrect) {
                 print("correct");
+                DTRH_GameManager._instance.cultistScore++;
                 LeanTween.move(paper.rectTransform, new Vector3(-500, 300, 0), 1).setOnComplete(OnPaperSubmitted);
             } 
             else {
@@ -76,6 +77,7 @@ public class ProjectProposalGame_StateHandler : MonoBehaviour
             submitCount--;
             if(!paper.IsCorrect) {
                 print("correct");
+                DTRH_GameManager._instance.cultistScore++;
                 LeanTween.move(paper.rectTransform, new Vector3(500 + 1280, 300, 0), 1).setOnComplete(OnPaperSubmitted);
             } 
             else {

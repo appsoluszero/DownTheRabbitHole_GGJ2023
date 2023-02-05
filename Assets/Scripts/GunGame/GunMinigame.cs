@@ -117,6 +117,7 @@ public class GunMinigame : MonoBehaviour
         }
         if (isCorrect) {
             Debug.Log("[Debug] GunMinigame: done, success");
+            DTRH_GameManager._instance.rodyScore++;
             gameSuccessEvent.Invoke();
         } else {
             Debug.Log("[Debug] GunMinigame: done, fail");

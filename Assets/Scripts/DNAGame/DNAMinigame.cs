@@ -142,6 +142,7 @@ public class DNAMinigame : MonoBehaviour
     public void Check() {
         if (point >= 98) {
             Debug.Log("[Debug] DNAMinigame: done, success");
+            DTRH_GameManager._instance.rodyScore++;
             gameSuccessEvent.Invoke();
         }
         /*

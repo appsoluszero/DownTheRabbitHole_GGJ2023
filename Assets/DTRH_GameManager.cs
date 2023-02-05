@@ -6,10 +6,16 @@ using UnityEngine;
 public class DTRH_GameManager : MonoBehaviour
 {
     public static DTRH_GameManager _instance;
+    [Header("Intro sequence")]
     public RectTransform introObject;
     public float timeToStay, timeToMoveOut;
     public LeanTweenType easeType;
     private Action OnIntroEnd;
+    public AudioSource audioPlayer;
+    public AudioClip introClip;
+
+
+    [Header("Lobby")]
     public RoomType currentRoomType;
     [Header("Player")]
     public GameObject playerChar;
@@ -29,6 +35,14 @@ public class DTRH_GameManager : MonoBehaviour
     public enum GamePhase {Work, Afterwork};
     public GamePhase gamePhase = GamePhase.Work;
     public bool inMinigame = false;
+
+    [Header("Score system")]
+    public int cultistScore = 0;
+    public int cultistHappyThreshold = 7;
+    public int royScore = 0;
+    public int royHappyThreshold = 9;
+    public int rodyScore = 0;
+    public int rodyHappyThreshold = 5;
 
     void Awake()
     {
@@ -61,6 +75,7 @@ public class DTRH_GameManager : MonoBehaviour
 
     IEnumerator StartIntroSequence() 
     {
+        audioPlayer.PlayOneShot(introClip);
         yield return new WaitForSeconds(timeToStay);
         LeanTween.moveY(introObject, -720, timeToMoveOut).setEase(easeType).setOnComplete(OnIntroEnd);
     }
@@ -68,6 +83,7 @@ public class DTRH_GameManager : MonoBehaviour
     void IntroEnd() 
     {
         introObject.gameObject.SetActive(false);
+        audioPlayer.Play();
     }
 
     public void EnterRoom() 
