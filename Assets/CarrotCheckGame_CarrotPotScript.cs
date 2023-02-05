@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class CarrotCheckGame_CarrotPotScript : MonoBehaviour, IPointerClickHandler
 {
@@ -12,6 +13,13 @@ public class CarrotCheckGame_CarrotPotScript : MonoBehaviour, IPointerClickHandl
     private float rightPercent;
     private bool waitingForCare;
 
+    [Header("Sprite database")]
+    public Sprite goodCarrotSprite;
+    public List<Sprite> badCarrotSpriteList;
+
+    [Header("UI element")]
+    public Image carrotImage;
+
     public void ActivateNeedAttentionMode() 
     {
         barTransform.gameObject.SetActive(true);
@@ -21,6 +29,7 @@ public class CarrotCheckGame_CarrotPotScript : MonoBehaviour, IPointerClickHandl
         rightPercent = Random.Range(0, 100)/100f * (barTransform.sizeDelta.x - checkingSize/2f);
         barRightTransform.anchoredPosition = new Vector2(rightPercent, barRightTransform.anchoredPosition.y);
         waitingForCare = true;
+        carrotImage.sprite = badCarrotSpriteList[Random.Range(0, badCarrotSpriteList.Count)];
     }
 
     public void OnPointerClick(PointerEventData ped) 
@@ -30,6 +39,8 @@ public class CarrotCheckGame_CarrotPotScript : MonoBehaviour, IPointerClickHandl
         if(currPos >= rightPercent-checkingSize/2f && currPos <= rightPercent+checkingSize/2f) 
         {
             barTransform.gameObject.SetActive(false);
+            carrotImage.sprite = goodCarrotSprite;
+            waitingForCare = false;
         }
         else print("no");
     }
