@@ -41,6 +41,8 @@ public class CarrotCheckGame_CarrotPotScript : MonoBehaviour, IPointerClickHandl
             barTransform.gameObject.SetActive(false);
             carrotImage.sprite = goodCarrotSprite;
             waitingForCare = false;
+            CarrotCheckGame_MainManager._instance.toBeCompleted--;
+            if (CarrotCheckGame_MainManager._instance.toBeCompleted == 0) CarrotCheckGame_MainManager._instance.gameSuccessEvent.Invoke();
         }
         else print("no");
     }

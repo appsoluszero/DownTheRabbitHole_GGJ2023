@@ -144,10 +144,12 @@ public class DNAMinigame : MonoBehaviour
             Debug.Log("[Debug] DNAMinigame: done, success");
             gameSuccessEvent.Invoke();
         }
+        /*
         else {
             Debug.Log("[Debug] DNAMinigame: done, fail");
             gameFailEvent.Invoke();
         }
+        */
     }
     #endregion
     

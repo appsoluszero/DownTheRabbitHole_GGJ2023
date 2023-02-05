@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ProjectProposalGame_StateHandler : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class ProjectProposalGame_StateHandler : MonoBehaviour
 
     public int submitCount = 3;
 
+    [SerializeField] private UnityEvent gameSuccessEvent;
+
     void Awake() 
     {
         if (_instance != null && _instance != this)
@@ -40,6 +43,7 @@ public class ProjectProposalGame_StateHandler : MonoBehaviour
     void Start()
     {
         //SetupToStartMinigame();
+        OnPaperSubmitted += CheckEndGame;
     }
 
     //Start the minigame here
@@ -57,29 +61,35 @@ public class ProjectProposalGame_StateHandler : MonoBehaviour
     {
         if(correctSubmitter.IsWaitingForSubmit && !incorrectSubmitter.IsWaitingForSubmit) 
         {
+            submitCount--;
             if(paper.IsCorrect) {
                 print("correct");
-                LeanTween.move(paper.rectTransform, new Vector3(-500, 300, 0), 1).setOnStart(OnPaperSubmitted);
+                LeanTween.move(paper.rectTransform, new Vector3(-500, 300, 0), 1).setOnComplete(OnPaperSubmitted);
             } 
             else {
                 print("incorrect");
-                LeanTween.move(paper.rectTransform, new Vector3(-500, 300, 0), 1).setOnStart(OnPaperSubmitted);
+                LeanTween.move(paper.rectTransform, new Vector3(-500, 300, 0), 1).setOnComplete(OnPaperSubmitted);
             } 
         }
         else if(!correctSubmitter.IsWaitingForSubmit && incorrectSubmitter.IsWaitingForSubmit) 
         {
+            submitCount--;
             if(!paper.IsCorrect) {
                 print("correct");
-                LeanTween.move(paper.rectTransform, new Vector3(500 + 1280, 300, 0), 1).setOnStart(OnPaperSubmitted);
+                LeanTween.move(paper.rectTransform, new Vector3(500 + 1280, 300, 0), 1).setOnComplete(OnPaperSubmitted);
             } 
             else {
                 print("incorrect");
-                LeanTween.move(paper.rectTransform, new Vector3(500 + 1280, 300, 0), 1).setOnStart(OnPaperSubmitted);
+                LeanTween.move(paper.rectTransform, new Vector3(500 + 1280, 300, 0), 1).setOnComplete(OnPaperSubmitted);
             } 
         }
-        submitCount--;
+    }
+
+    void CheckEndGame() {
         if(submitCount == 0) {
             //minigame done this round, do whateve
+            // Debug.Log("DONEEEEE");
+            gameSuccessEvent.Invoke();
         }
     }
 }

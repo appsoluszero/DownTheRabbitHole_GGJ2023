@@ -78,24 +78,22 @@ public class DTRH_GameManager : MonoBehaviour
         {
             case RoomType.AdminOffice:
                 AdminOfficeUI.SetActive(true);
-                gameTimer.proposalGameTimerStart();
+                ProjectProposalGame_StateHandler._instance.SetupToStartMinigame();
                 inMinigame = true;
                 break;
             case RoomType.Garden:
                 CarrotGardenUI.SetActive(true);
-                gameTimer.carrotGameTimerStart();
+                CarrotCheckGame_MainManager._instance.SetupToStartMinigame();
                 inMinigame = true;
                 break;
             case RoomType.RandD_Gun:
                 WeaponDevUI.SetActive(true);
-                //GunMinigame.instance.StartMinigame();
-                gameTimer.gunGameTimerStart();
+                GunMinigame.StartMinigameStatic();
                 inMinigame = true;
                 break;
             case RoomType.RandD_DNA:
                 DNAOfficeUI.SetActive(true);
-                //DNAMinigame.instance.StartMinigame();
-                gameTimer.dnaGameTimerStart();
+                DNAMinigame.StartMinigameStatic();
                 inMinigame = true;
                 break;
                 
@@ -114,6 +112,27 @@ public class DTRH_GameManager : MonoBehaviour
         playerChar.SetActive(true);
     }
 
+    public void FinProposalGame(bool success) {
+        gameTimer.proposalGameTimerReset();
+
+        //TODO: add score if success or something
+    }
+    public void FinCarrotGame(bool success) {
+        gameTimer.carrotGameTimerReset();
+
+        //TODO: add score if success or something
+    }
+    public void FinDNAGame(bool success) {
+        gameTimer.dnaGameTimerReset();
+
+        //TODO: add score if success or something
+    }
+    public void FinGunGame(bool success) {
+        gameTimer.gunGameTimerReset();
+
+        //TODO: add score if success or something
+    }
+
     public void ProceedNextDay() {
         day++;
         // TODO: change scene appropriately
@@ -126,7 +145,7 @@ public class DTRH_GameManager : MonoBehaviour
         gameTimerRunnning = true;
 
         // start dat timer
-        gameTimer.dayTimerStart();
+        gameTimer.dayTimerReset();
     }
 
     void UpdateGameLoop() {
@@ -142,16 +161,22 @@ public class DTRH_GameManager : MonoBehaviour
         UpdateGameTimer();
 
         // quit minigame when timers are done
-        if (inMinigame && (gameTimer.minigameTimer <= 0 || gameTimer.dayTimer <= 0)) {
+        if (inMinigame && gameTimer.dayTimer <= 0) {
             ExitRoom();
         }
     }
 
     void UpdateGameTimer() {
         gameTimer.dayTimer -= Time.deltaTime;
-        gameTimer.minigameTimer -= Time.deltaTime;
+        gameTimer.proposalGameTimer -= Time.deltaTime;
+        gameTimer.carrotGameTimer -= Time.deltaTime;
+        gameTimer.dnaGameTimer -= Time.deltaTime;
+        gameTimer.gunGameTimer -= Time.deltaTime;
         if (gameTimer.dayTimer < 0) gameTimer.dayTimer = 0;
-        if (gameTimer.minigameTimer < 0) gameTimer.minigameTimer = 0;
+        if (gameTimer.proposalGameTimer < 0) gameTimer.proposalGameTimer = 0;
+        if (gameTimer.carrotGameTimer < 0) gameTimer.carrotGameTimer = 0;
+        if (gameTimer.dnaGameTimer < 0) gameTimer.dnaGameTimer = 0;
+        if (gameTimer.gunGameTimer < 0) gameTimer.gunGameTimer = 0;
     }
 }
 
@@ -169,14 +194,17 @@ public class GameTimer {
    public float dayTimerInit = 180;
    public float dayTimer = 0;
    public float proposalGameTimerInit = 40;
+   public float proposalGameTimer = 0;
    public float carrotGameTimerInit = 40;
+   public float carrotGameTimer = 0;
    public float dnaGameTimerInit = 40;
+   public float dnaGameTimer = 0;
    public float gunGameTimerInit = 40;
-   public float minigameTimer;
+   public float gunGameTimer = 0;
 
-   public void dayTimerStart() => dayTimer = dayTimerInit;
-   public void proposalGameTimerStart() => minigameTimer = proposalGameTimerInit;
-   public void carrotGameTimerStart() => minigameTimer = carrotGameTimerInit;
-   public void dnaGameTimerStart() => minigameTimer = dnaGameTimerInit;
-   public void gunGameTimerStart() => minigameTimer = gunGameTimerInit;
+   public void dayTimerReset() => dayTimer = dayTimerInit;
+   public void proposalGameTimerReset() => proposalGameTimer = proposalGameTimerInit;
+   public void carrotGameTimerReset() => carrotGameTimer = carrotGameTimerInit;
+   public void dnaGameTimerReset() => dnaGameTimer = dnaGameTimerInit;
+   public void gunGameTimerReset() => gunGameTimer = gunGameTimerInit;
 }
