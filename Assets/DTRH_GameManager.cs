@@ -13,6 +13,9 @@ public class DTRH_GameManager : MonoBehaviour
     private Action OnIntroEnd;
     public AudioSource audioPlayer;
     public AudioClip introClip;
+    [Header("Timeout sequence")]
+    public RectTransform timeoutObject;
+    public float timeToStayChange, timeToMove;
 
 
     [Header("Lobby")]
@@ -66,9 +69,6 @@ public class DTRH_GameManager : MonoBehaviour
     {
         OnIntroEnd += IntroEnd;
         StartCoroutine(StartIntroSequence());
-
-        // Start game loop
-        OnIntroEnd += StartGameLoop;
     }
 
     void Update() {
@@ -101,7 +101,7 @@ public class DTRH_GameManager : MonoBehaviour
     {
         audioPlayer.PlayOneShot(introClip);
         yield return new WaitForSeconds(timeToStay);
-        LeanTween.moveY(introObject, -720, timeToMoveOut).setEase(easeType).setOnComplete(OnIntroEnd);
+        LeanTween.moveY(introObject, -720, timeToMoveOut).setEase(easeType).setOnComplete(OnIntroEnd).setOnStart(StartGameLoop);
     }
 
     void IntroEnd() 
@@ -143,6 +143,9 @@ public class DTRH_GameManager : MonoBehaviour
                 DNAMinigame.StartMinigameStatic();
                 inMinigame = true;
                 playerChar.SetActive(false);
+                break;
+            case RoomType.Exit:
+                //Do the exit
                 break;
                 
         }
@@ -199,9 +202,8 @@ public class DTRH_GameManager : MonoBehaviour
         // check timer done
         if (gameTimer.dayTimer <= 0 && gamePhase == GamePhase.Work) {
             // time's up for the day
-            gamePhase = GamePhase.Afterwork;
-            // TODO: change stuff to after work
-            // TODO: close all minigame
+            timeoutObject.gameObject.SetActive(true);
+            LeanTween.moveY(timeoutObject, 0, timeToMove).setEase(easeType).setOnComplete(_ => StartCoroutine(timeoutSequence()));
         }
 
         // update the timer
@@ -211,6 +213,24 @@ public class DTRH_GameManager : MonoBehaviour
         if (inMinigame && gameTimer.dayTimer <= 0) {
             ExitRoom();
         }
+    }
+
+    IEnumerator timeoutSequence() 
+    {
+        yield return new WaitForSeconds(timeToStayChange);
+        timeoutObject.gameObject.SetActive(false);
+        ChangeToAfterWork();
+        /*LeanTween.moveY(timeoutObject, -720, timeToMove).setEase(easeType).setOnComplete(_ => {
+            
+        });*/
+        
+    }
+
+    void ChangeToAfterWork()
+    {
+        gamePhase = GamePhase.Afterwork;    
+        // TODO: change stuff to after work
+        // TODO: close all minigame
     }
 
     void UpdateGameTimer() {
@@ -233,7 +253,8 @@ public enum RoomType
     AdminOffice,
     RandD_DNA,
     RandD_Gun,
-    Garden
+    Garden,
+    Exit
 }
 
 [System.Serializable]

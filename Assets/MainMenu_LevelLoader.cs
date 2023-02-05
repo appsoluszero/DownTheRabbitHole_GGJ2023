@@ -12,7 +12,13 @@ public class MainMenu_LevelLoader : MonoBehaviour
     public void LoadScene() 
     {
         loadScreen.SetActive(true);
-        StartCoroutine(loadSceneAsync());
+        StartCoroutine(loadSceneAsync(1));
+    }
+
+    public void LoadScene(int i) 
+    {
+        loadScreen.SetActive(true);
+        StartCoroutine(loadSceneAsync(i));
     }
 
     public void ExitGame()
@@ -20,9 +26,9 @@ public class MainMenu_LevelLoader : MonoBehaviour
         Application.Quit();
     }
 
-    IEnumerator loadSceneAsync() 
+    IEnumerator loadSceneAsync(int i) 
     {
-        var op = SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
+        var op = SceneManager.LoadSceneAsync(i, LoadSceneMode.Single);
         op.allowSceneActivation = false;
         while(op.progress < 0.9f) {
             loadProgress.text = "Initializing world domination... " + (int)(op.progress/0.9f * 100) + "%";

@@ -43,6 +43,7 @@ public class CarrotCheckGame_CarrotPotScript : MonoBehaviour, IPointerClickHandl
             waitingForCare = false;
             CarrotCheckGame_MainManager._instance.toBeCompleted--;
             DTRH_GameManager._instance.royScore++;
+            LeanTween.cancel(arrowTransform);
             if (CarrotCheckGame_MainManager._instance.toBeCompleted == 0) CarrotCheckGame_MainManager._instance.gameSuccessEvent.Invoke();
         }
         else print("no");
